@@ -10,6 +10,7 @@ const request = require('request');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+	let bot = new MWBot();
 	async function init(){
 		let page = await vscode.window.showInputBox({
 			value: '',
@@ -28,11 +29,38 @@ function activate(context) {
 					editBuilder.replace(new vscode.Range(new vscode.Position(0, 0), end), text);
 				});
 			}
-		})
-		
+		});	
+	}
+	async function GetPagenameAndPushEdit() {
+		let apiurl = vscode.workspace.getConfiguration().get('ewiv.apiUrl');
+		let username = vscode.workspace.getConfiguration().get('ewiv.userName');
+		let password = vscode.workspace.getConfiguration().get('ewiv.password');
+		let summary = vscode.workspace.getConfiguration().get('ewiv.summary');
+		let content = vscode.window.activeTextEditor.document.getText();
+		let pagename = await vscode.window.showInputBox({
+			value: '',
+			ignoreFocusOut: true,
+			password: false,
+			prompt: '要编辑的页面'
+		});
+		bot.loginGetEditToken({
+			apiUrl: 'https://' + apiurl,
+			username: username,
+			password: password
+		}).then(() => {
+			return bot.edit(pagename, content, summary);
+		}).then((response) => {
+			//console.log(response);
+			vscode.window.showInformationMessage('Success');
+			// Success
+		}).catch((err) => {
+			vscode.window.showInformationMessage(err);
+			console.log(err);
+			// Error
+		});
 	}
 	let CommandEwivPush = vscode.commands.registerCommand('extension.ewivpush', function () {
-		let bot = new MWBot();
+		
 		if (vscode.window.activeTextEditor) {
 			let content = vscode.window.activeTextEditor.document.getText();
 			console.log(content);
@@ -41,6 +69,13 @@ function activate(context) {
 			let password = vscode.workspace.getConfiguration().get('ewiv.password');
 			let pagename = vscode.workspace.getConfiguration().get('ewiv.pageName');
 			let summary = vscode.workspace.getConfiguration().get('ewiv.summary');
+			if(!pagename){
+				pagename = vscode.window.activeTextEditor.document.getText(new vscode.Range(new vscode.Position(0, 0), new vscode.Position(1, 0)));
+				if (!(pagename.match('<!--ewiv info DO NOT edit (.*)-->'))){
+					GetPagenameAndPushEdit();
+				}
+				return;
+			}
 			bot.loginGetEditToken({
 				apiUrl: 'https://' + apiurl,
 				username: username,
@@ -49,13 +84,11 @@ function activate(context) {
 				if(pagename){
 					return bot.edit(pagename, content, summary);
 				}else{
-					pagename = vscode.window.activeTextEditor.document.getText(new vscode.Range(new vscode.Position(0, 0), new vscode.Position(1, 0)));
 					//console.log(pagename);
 					pagename = pagename.match('<!--ewiv info DO NOT edit (.*)-->')[1];
 					content = vscode.window.activeTextEditor.document.getText(new vscode.Range(new vscode.Position(1, 0), new vscode.Position(vscode.window.activeTextEditor.document.lineCount + 1, 0)));
 					return bot.edit(pagename, content, summary);
 				}
-				
 			}).then((response) => {
 				//console.log(response);
 				vscode.window.showInformationMessage('Success');

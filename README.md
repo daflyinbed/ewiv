@@ -4,9 +4,14 @@
 
 ## Features
 
-需要在设置中填写 api.php的url，用户名，密码，编辑的页面，编辑摘要
-写完之后ctrl+shift+p push即可
+* 需要在设置中填写 api.php的url，用户名，密码，编辑的页面(可选)，编辑摘要
+* 使用ewiv:load page从服务端加载wikitext
+* 使用ewiv:submit把当前文件提交到服务器
 
+是否填写了‘编辑的页面’ | 是 | 否 
+-|-|-
+文本加载自loadpage | 提交到‘编辑的页面’ | 提交到loadpage的页面
+文本不是加载自loadpage | 提交到‘编辑的页面’ | 弹窗要求填写提交目标页面
 
 ## Extension Settings
 
@@ -21,8 +26,3 @@
 * wikitext的语法高亮
 * 浏览器直接唤醒vscode
 
-## Release Notes
-
-### 0.0.1
-
-Initial release of emiv

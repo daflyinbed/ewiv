@@ -52,11 +52,11 @@
 		"commands": [
 			{
 				"command": "extension.ewivpush",
-				"title": "push"
+				"title": "ewiv:submit"
 			},
 			{
 				"command": "extension.ewivinit",
-				"title": "load page"
+				"title": "ewiv:load page"
 			}
 		],
 		"languages": [
