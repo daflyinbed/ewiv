@@ -2,7 +2,7 @@
 	"name": "ewiv",
 	"displayName": "ewiv",
 	"description": "edit mediawiki in VSCode",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "xwbx",
 	"engines": {
 		"vscode": "^1.35.0"
@@ -79,6 +79,10 @@
 				"path": "./syntaxes/wikitext.tmLanguage.json"
 			}
 		]
+	},
+	"repository": {
+		"type": "git",
+		"url":"https://github.com/daflyinbed/ewiv"
 	},
 	"scripts": {
 		"postinstall": "node ./node_modules/vscode/bin/install",
