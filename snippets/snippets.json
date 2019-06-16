@@ -1,0 +1,104 @@
+{
+    "expr":{
+        "prefix":"expr",
+        "body":[
+            "{{#expr :${1:表达式} }}"
+        ],
+        "description":"计算数学表达式"
+    },
+    "ifelse":{
+        "prefix":"ifelse",
+        "body":[
+            "{{#if :${1:判断字符串} | ${2:then字符串} | ${3:else字符串} }}"
+        ],
+        "description":"若判断字符串为非空字符串（忽略前导或后缀空格），则函数返回then字符串，否则函数返回else字符串。else字符可被省略而不会造成错误，但函数在判断字符串为空时便会返回空字符串。"
+    },
+    "if": {
+        "prefix": "if",
+        "body": [
+            "{{#if :${1:判断字符串} | ${2:then字符串} }}"
+        ],
+        "description": "若判断字符串为非空字符串（忽略前导或后缀空格），则函数返回then字符串，否则函数返回else字符串。else字符可被省略而不会造成错误，但函数在判断字符串为空时便会返回空字符串。"
+    },
+    "ifeq": {
+        "prefix": "ifeq",
+        "body": [
+            "{{#ifeq :${1:字符串1} | ${2:字符串2} | ${3:相等时返回的字符串} | ${4:不相等时返回的字符串} }}"
+        ],
+        "description":"比较两个字符串，返回比较结果"
+    },
+    "ifexist": {
+        "prefix": "ifexist",
+        "body": [
+            "{{#ifexist :${1:待测页面标题} | ${2:存在文字} | ${3:不存在文字} }}"
+        ],
+        "description":"判断指定的页面是否存在，然后返回对应的文字:"
+    },
+    "ifexpr": {
+        "prefix": "ifexpr",
+        "body": [
+            "{{#ifexpr :${1:表达式} | $2:{表达式不为0的结果} | $3{:表达式为0的结果} }}"
+        ],
+        "description": "计算数学表达式，并根据计算结果返回字符串,表达式语法与expr相同。"
+    },
+    "iferror": {
+        "prefix": "iferror",
+        "body": [
+            "{{#iferror :${1:测试表达式} | ${2:出错时显示结果} | ${3:正确运算时显示结果} }}"
+        ],
+        "description": ""
+    },
+    "rel2abs": {
+        "prefix": "rel2abs",
+        "body": [
+            "{{#rel2abs :${:路径} }}"
+        ],
+        "description": ""
+    },
+    "rel2absbase": {
+        "prefix": "rel2absbase",
+        "body": [
+            "{{#rel2abs :${:路径} | ${2:base路径} }}"
+        ],
+        "description": ""
+    },
+    "switch": {
+        "prefix": "switch",
+        "body": [
+            "{{#switch :${1:比较值}",
+            " | ${2:预设值1} ${3:[= 结果1]}",
+            " | ${4:预设值n} ${5:[= 结果n]}",
+            " | ${6:[ #default = ]}${7:缺省结果} ",
+            "}}"
+        ],
+        "description": "将一个值与多个预设值比较，若有匹配时则返回指定字符串，若某预设值后未设置结果，这样如果该预设值与比较值匹配，则函数返回第一个有结果的预设值的结果"
+    },
+    "time": {
+        "prefix": "time",
+        "body": [
+            "{{#time: ${1:格式参数} | ${2:时间参数} }}"
+        ],
+        "description": "时间日期格式化"
+    },
+    "titleparts": {
+        "prefix": "time",
+        "body": [
+            "{{#time: ${1:格式参数} | ${2:时间参数} }}"
+        ],
+        "description": "时间日期格式化"
+    },
+    "replace": {
+        "prefix": "replace",
+        "body": [
+            "{{#replace: ${1:内容} | ${2:需要替换的元素} | {3:用来替换的元素} }}"
+        ],
+        "description": "替换内容中特定的元素"
+    },
+    "invoke": {
+        "prefix": "invoke",
+        "body": [
+            "{{#invoke: ${1:模块名} | ${2:函数名} | ${3:arg1} | ${4:arg2} }}"
+        ],
+        "description": "函数会调用位于Module命名空间下的Lua模块"
+    },
+}

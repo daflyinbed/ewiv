@@ -48,6 +48,29 @@
 				"command": "extension.ewivpush",
 				"title": "push"
 			}
+		],
+		"languages": [
+			{
+				"id":"wikitext",
+				"extensions": [
+					".mw",
+					".wikitext"
+				],
+				"aliases": [
+					"wikitext"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "wikitext",
+				"path": "./snippets/snippets.json"
+			},
+			{
+				"language": "wikitext",
+				"path": "./snippets/Variables.json"				
+			}
 		]
 	},
 	"scripts": {
