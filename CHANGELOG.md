@@ -15,3 +15,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.0.3]
 
 - 新增load page指令从wiki直接加载wikitext
+
+## [0.0.4]
+
+- 当参数‘要编辑的页面’为空时会自动推送到load page加载的页面

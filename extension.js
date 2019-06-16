@@ -24,7 +24,7 @@ function activate(context) {
 				vscode.window.activeTextEditor.edit(editBuilder => {
 					const end = new vscode.Position(vscode.window.activeTextEditor.document.lineCount + 1, 0);
 					vscode.languages.setTextDocumentLanguage(vscode.window.activeTextEditor.document, 'wikitext');
-					const text = body;
+					const text ='<!--ewiv info DO NOT edit '+page+'-->\n'+ body;
 					editBuilder.replace(new vscode.Range(new vscode.Position(0, 0), end), text);
 				});
 			}
@@ -46,9 +46,18 @@ function activate(context) {
 				username: username,
 				password: password
 			}).then(() => {
-				return bot.edit(pagename, content, summary);
+				if(pagename){
+					return bot.edit(pagename, content, summary);
+				}else{
+					pagename = vscode.window.activeTextEditor.document.getText(new vscode.Range(new vscode.Position(0, 0), new vscode.Position(1, 0)));
+					//console.log(pagename);
+					pagename = pagename.match('<!--ewiv info DO NOT edit (.*)-->')[1];
+					content = vscode.window.activeTextEditor.document.getText(new vscode.Range(new vscode.Position(1, 0), new vscode.Position(vscode.window.activeTextEditor.document.lineCount + 1, 0)));
+					return bot.edit(pagename, content, summary);
+				}
+				
 			}).then((response) => {
-				console.log(response);
+				//console.log(response);
 				vscode.window.showInformationMessage('Success');
 				// Success
 			}).catch((err) => {
