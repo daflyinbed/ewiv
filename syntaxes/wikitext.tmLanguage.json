@@ -1,0 +1,147 @@
+{
+    "scopeName":"source.wikitext",
+    "patterns":[
+        {
+            "include":"#expression"
+        }
+    ],
+    "repository":{
+        "expression":{
+            "patterns":[
+                {
+                    "include": "#expr"
+                },
+                {
+                    "include": "#ifelse"
+                },
+                {
+                    "include": "#if"
+                },
+                {
+                    "include": "#ifeq"
+                },
+                {
+                    "include": "#ifexist"
+                },
+                {
+                    "include": "#ifexpr"
+                },
+                {
+                    "include": "#iferror"
+                },
+                {
+                    "include": "#rel2abs"
+                },
+                {
+                    "include": "#rel2absbase"
+                },
+                {
+                    "include": "#switch"
+                },
+                {
+                    "include": "#time"
+                },
+                {
+                    "include": "#titleparts"
+                },
+                {
+                    "include": "#replace"
+                },
+                {
+                    "include": "#invoke"
+                },
+                {
+                    "include": "#vardefine"
+                },
+                {
+                    "include": "#vardefineecho"
+                },
+                {
+                    "include": "#var"
+                },
+                {
+                    "include": "#varexists"
+                },
+                {
+                    "include": "#var_final"
+                }
+            ]
+        },
+        "if":{
+            "match":"#if:",
+            "name":"keyword.fun.if"
+        },
+        "expr": {
+            "match": "#expr:",
+            "name": "keyword.fun.expr"
+        },
+        "ifelse": {
+            "match": "#ifelse:",
+            "name": "keyword.fun.ifelse"
+        },
+        "ifeq": {
+            "match": "#ifeq:",
+            "name": "keyword.fun.ifeq"
+        },
+        "ifexist": {
+            "match": "#ifexist:",
+            "name": "keyword.fun.ifexist"
+        },
+        "ifexpr": {
+            "match": "#ifexpr:",
+            "name": "keyword.fun.ifexpr"
+        },
+        "iferror": {
+            "match": "#iferror:",
+            "name": "keyword.fun.iferror"
+        },
+        "rel2abs": {
+            "match": "#rel2abs:",
+            "name": "keyword.fun.rel2abs"
+        },
+        "rel2absbase": {
+            "match": "#rel2absbase:",
+            "name": "keyword.fun.rel2absbase"
+        },
+        "switch": {
+            "match": "#switch:",
+            "name": "keyword.fun.switch"
+        },
+        "time": {
+            "match": "#time:",
+            "name": "keyword.fun.time"
+        },
+        "titleparts": {
+            "match": "#titleparts:",
+            "name": "keyword.fun.titleparts"
+        },
+        "replace": {
+            "match": "#replace:",
+            "name": "keyword.fun.replace"
+        },
+        "invoke": {
+            "match": "#invoke:",
+            "name": "keyword.fun.invoke"
+        },  
+        "vardefine": {
+            "match": "#vardefine:",
+            "name": "keyword.fun.vardefine.if"
+        },
+        "vardefineecho": {
+            "match": "#vardefineecho:",
+            "name": "keyword.fun.vardefineecho.if"
+        },
+        "var": {
+            "match": "#var:",
+            "name": "keyword.fun.var.if"
+        },
+        "varexists": {
+            "match": "#varexists:",
+            "name": "keyword.fun.varexists.if"
+        },
+        "var_final": {
+            "match": "#var_final:",
+            "name": "keyword.fun.var_final.if"
+        }
+    }
+}
