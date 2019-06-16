@@ -11,3 +11,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.0.2]
 
 - 新增原生mediawiki和拓展Variables的解析器函数的代码片段和高亮，描述源自灰机wiki
+
+## [0.0.3]
+
+- 新增load page指令从wiki直接加载wikitext
