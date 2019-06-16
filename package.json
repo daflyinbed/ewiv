@@ -11,7 +11,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.ewivpush"
+		"onCommand:extension.ewivpush",
+		"onCommand:extension.ewivinit"
 	],
 	"main": "./extension.js",
 	"contributes": {
@@ -19,10 +20,15 @@
 			"type": "object",
 			"title": "edit mediaWiki in VSCode",
 			"properties": {
+				"ewiv.indexUrl":{
+					"type": "string",
+					"default": "fgo.wiki/index.php",
+					"description": "index.php"
+				},
 				"ewiv.apiUrl": {
 					"type": "string",
 					"default": "fgo.wiki/api.php",
-					"description": "wiki的api地址"
+					"description": "api.php"
 				},
 				"ewiv.userName": {
 					"type": "string",
@@ -38,7 +44,7 @@
 				},
 				"ewiv.summary": {
 					"type": "string",
-					"default":"edit in vscode",
+					"default": "edit in vscode",
 					"description": "编辑摘要"
 				}
 			}
@@ -47,11 +53,15 @@
 			{
 				"command": "extension.ewivpush",
 				"title": "push"
+			},
+			{
+				"command": "extension.ewivinit",
+				"title": "load page"
 			}
 		],
 		"languages": [
 			{
-				"id":"wikitext",
+				"id": "wikitext",
 				"extensions": [
 					".mw",
 					".wikitext"
@@ -69,7 +79,7 @@
 			},
 			{
 				"language": "wikitext",
-				"path": "./snippets/Variables.json"				
+				"path": "./snippets/Variables.json"
 			}
 		],
 		"grammars": [
@@ -82,7 +92,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url":"https://github.com/daflyinbed/ewiv"
+		"url": "https://github.com/daflyinbed/ewiv"
 	},
 	"scripts": {
 		"postinstall": "node ./node_modules/vscode/bin/install",
