@@ -25,3 +25,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - 当参数‘要编辑的页面’为空时,如果不是源自loadpage，会弹出窗口要求填写要修改的页面
 - 命令  push        ->  ewiv:submit
 - 命令  load page   ->  ewiv:load page
+
+## [0.06]
+
+- 修复bug
