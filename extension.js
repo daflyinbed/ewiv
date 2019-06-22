@@ -10,7 +10,6 @@ const request = require('request');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-	let bot = new MWBot();
 	async function init(){
 		let page = await vscode.window.showInputBox({
 			value: '',
@@ -32,6 +31,7 @@ function activate(context) {
 		});	
 	}
 	async function GetPagenameAndPushEdit() {
+		let bot = new MWBot();
 		let apiurl = vscode.workspace.getConfiguration().get('ewiv.apiUrl');
 		let username = vscode.workspace.getConfiguration().get('ewiv.userName');
 		let password = vscode.workspace.getConfiguration().get('ewiv.password');
@@ -76,6 +76,7 @@ function activate(context) {
 				}
 				return;
 			}
+			let bot = new MWBot();
 			bot.loginGetEditToken({
 				apiUrl: 'https://' + apiurl,
 				username: username,
