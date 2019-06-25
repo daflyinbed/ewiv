@@ -68,13 +68,15 @@ function activate(context) {
 			let username = vscode.workspace.getConfiguration().get('ewiv.userName');
 			let password = vscode.workspace.getConfiguration().get('ewiv.password');
 			let pagename = vscode.workspace.getConfiguration().get('ewiv.pageName');
-			let summary = vscode.workspace.getConfiguration().get('ewiv.summary');
-			if(!pagename){
-				pagename = vscode.window.activeTextEditor.document.getText(new vscode.Range(new vscode.Position(0, 0), new vscode.Position(1, 0)));
-				if (!(pagename.match('<!--ewiv info DO NOT edit (.*)-->'))){
+			let summary = vscode.workspace.getConfiguration().get('ewiv.summary')||'';
+			if(pagename==''){
+				pagename = vscode.window.activeTextEditor.document.getText(new vscode.Range(new vscode.Position(0, 0), new vscode.Position(1, 0))).match('<!--ewiv info DO NOT edit (.*)-->');
+				if (pagename==null){
 					GetPagenameAndPushEdit();
+					return;
+				}else{
+					pagename = pagename[1];
 				}
-				return;
 			}
 			let bot = new MWBot();
 			bot.loginGetEditToken({

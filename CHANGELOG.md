@@ -26,6 +26,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - 命令  push        ->  ewiv:submit
 - 命令  load page   ->  ewiv:load page
 
-## [0.06]
+## [0.0.6]
+
+- 修复bug
+
+## [0.0.7]
 
 - 修复bug
