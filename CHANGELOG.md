@@ -33,3 +33,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.0.7]
 
 - 修复bug
+
+## [0.08]
+
+- 新增snippets:widget

@@ -100,5 +100,12 @@
             "{{#invoke: ${1:模块名} | ${2:函数名} | ${3:arg1} | ${4:arg2} }}"
         ],
         "description": "函数会调用位于Module命名空间下的Lua模块"
+    },
+    "widget":{
+        "prefix":"widget",
+        "body":[
+            "<noinclude>{{#widget:{{FULLPAGENAME}}}}</noinclude>\n<includeonly>\n<style>\n${1}\n</style>\n\n<script>\n${2}\n</script>\n${3}\n</includeonly>"
+        ],
+        "description":"快速初始化widget页面"
     }
 }
