@@ -2,7 +2,7 @@
 	"name": "ewiv",
 	"displayName": "ewiv",
 	"description": "edit mediawiki in VSCode",
-	"version": "0.0.8",
+	"version": "0.0.9",
 	"publisher": "xwbx",
 	"engines": {
 		"vscode": "^1.35.0"
@@ -51,7 +51,7 @@
 		},
 		"commands": [
 			{
-				"command": "extension.ewivpush",
+				"command": "extension.ewivsubmit",
 				"title": "ewiv:submit"
 			},
 			{

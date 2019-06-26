@@ -31,11 +31,6 @@ function activate(context) {
 		});	
 	}
 	async function GetPagenameAndPushEdit() {
-		let bot = new MWBot();
-		let apiurl = vscode.workspace.getConfiguration().get('ewiv.apiUrl');
-		let username = vscode.workspace.getConfiguration().get('ewiv.userName');
-		let password = vscode.workspace.getConfiguration().get('ewiv.password');
-		let summary = vscode.workspace.getConfiguration().get('ewiv.summary');
 		let content = vscode.window.activeTextEditor.document.getText();
 		let pagename = await vscode.window.showInputBox({
 			value: '',
@@ -43,32 +38,32 @@ function activate(context) {
 			password: false,
 			prompt: '要编辑的页面'
 		});
+		submitEdit(pagename,content);
+	}
+	function submitEdit(pageName,content){
+		let apiUrl = vscode.workspace.getConfiguration().get('ewiv.apiUrl');
+		let userName = vscode.workspace.getConfiguration().get('ewiv.userName');
+		let password = vscode.workspace.getConfiguration().get('ewiv.password');
+		let summary = vscode.workspace.getConfiguration().get('ewiv.summary') || '';
+		let bot = new MWBot();
 		bot.loginGetEditToken({
-			apiUrl: 'https://' + apiurl,
-			username: username,
+			apiUrl: 'https://' + apiUrl,
+			username: userName,
 			password: password
 		}).then(() => {
-			return bot.edit(pagename, content, summary);
+			return bot.edit(pageName, content, summary);
 		}).then((response) => {
-			//console.log(response);
-			vscode.window.showInformationMessage('Success');
-			// Success
+			console.log(response);
+			vscode.window.showInformationMessage(response.edit.result);
 		}).catch((err) => {
 			vscode.window.showInformationMessage(err);
 			console.log(err);
-			// Error
 		});
 	}
-	let CommandEwivPush = vscode.commands.registerCommand('extension.ewivpush', function () {
-		
+	let CommandEwivSubmit = vscode.commands.registerCommand('extension.ewivsubmit', function () {
 		if (vscode.window.activeTextEditor) {
 			let content = vscode.window.activeTextEditor.document.getText();
-			console.log(content);
-			let apiurl = vscode.workspace.getConfiguration().get('ewiv.apiUrl');
-			let username = vscode.workspace.getConfiguration().get('ewiv.userName');
-			let password = vscode.workspace.getConfiguration().get('ewiv.password');
-			let pagename = vscode.workspace.getConfiguration().get('ewiv.pageName');
-			let summary = vscode.workspace.getConfiguration().get('ewiv.summary')||'';
+			let pagename = vscode.workspace.getConfiguration().get('ewiv.pageName') || '';
 			if(pagename==''){
 				pagename = vscode.window.activeTextEditor.document.getText(new vscode.Range(new vscode.Position(0, 0), new vscode.Position(1, 0))).match('<!--ewiv info DO NOT edit (.*)-->');
 				if (pagename==null){
@@ -76,30 +71,10 @@ function activate(context) {
 					return;
 				}else{
 					pagename = pagename[1];
+					content = vscode.window.activeTextEditor.document.getText(new vscode.Range(new vscode.Position(1, 0), new vscode.Position(vscode.window.activeTextEditor.document.lineCount + 1, 0)));
 				}
 			}
-			let bot = new MWBot();
-			bot.loginGetEditToken({
-				apiUrl: 'https://' + apiurl,
-				username: username,
-				password: password
-			}).then(() => {
-				if(pagename){
-					return bot.edit(pagename, content, summary);
-				}else{
-					//console.log(pagename);
-					pagename = pagename.match('<!--ewiv info DO NOT edit (.*)-->')[1];
-					content = vscode.window.activeTextEditor.document.getText(new vscode.Range(new vscode.Position(1, 0), new vscode.Position(vscode.window.activeTextEditor.document.lineCount + 1, 0)));
-					return bot.edit(pagename, content, summary);
-				}
-			}).then((response) => {
-				//console.log(response);
-				vscode.window.showInformationMessage('Success');
-				// Success
-			}).catch((err) => {
-				console.log(err);
-				// Error
-			});
+			submitEdit(pagename,content);
 		} else {
 			console.error("undefined vscode.window.activeTextEditor");
 		}
@@ -109,7 +84,7 @@ function activate(context) {
 		init();
 	});
 	context.subscriptions.push(CommandEwivInit);
-	context.subscriptions.push(CommandEwivPush);
+	context.subscriptions.push(CommandEwivSubmit);
 }
 
  

@@ -34,6 +34,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - 修复bug
 
-## [0.08]
+## [0.0.8]
 
 - 新增snippets:widget
+
+## [0.0.9]
+
+- 修复会把ewiv的注释提交到服务器的问题
+- 重构
