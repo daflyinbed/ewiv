@@ -10,7 +10,7 @@ const request = require('request');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-	async function init(){
+	async function init() {
 		let page = await vscode.window.showInputBox({
 			value: '',
 			ignoreFocusOut: true,
@@ -18,17 +18,17 @@ function activate(context) {
 			prompt: '要编辑的页面'
 		});
 		let indexurl = vscode.workspace.getConfiguration().get('ewiv.indexUrl');
-		console.log('https://' + indexurl + '?title=' + page + '&action=raw');
-		request('https://' + indexurl + '?title=' + encodeURI(page)+'&action=raw',function(error,response,body){
-			if(!error&&response.statusCode==200){
+		console.log(indexurl + '?title=' + page + '&action=raw');
+		request(indexurl + '?title=' + encodeURI(page) + '&action=raw', function (error, response, body) {
+			if (!error && response.statusCode == 200) {
 				vscode.window.activeTextEditor.edit(editBuilder => {
 					const end = new vscode.Position(vscode.window.activeTextEditor.document.lineCount + 1, 0);
 					vscode.languages.setTextDocumentLanguage(vscode.window.activeTextEditor.document, 'wikitext');
-					const text ='<!--ewiv info DO NOT edit '+page+'-->\n'+ body;
+					const text = '<!--ewiv info DO NOT edit ' + page + '-->\n' + body;
 					editBuilder.replace(new vscode.Range(new vscode.Position(0, 0), end), text);
 				});
 			}
-		});	
+		});
 	}
 	async function GetPagenameAndPushEdit() {
 		let content = vscode.window.activeTextEditor.document.getText();
@@ -38,16 +38,16 @@ function activate(context) {
 			password: false,
 			prompt: '要编辑的页面'
 		});
-		submitEdit(pagename,content);
+		submitEdit(pagename, content);
 	}
-	function submitEdit(pageName,content){
+	function submitEdit(pageName, content) {
 		let apiUrl = vscode.workspace.getConfiguration().get('ewiv.apiUrl');
 		let userName = vscode.workspace.getConfiguration().get('ewiv.userName');
 		let password = vscode.workspace.getConfiguration().get('ewiv.password');
 		let summary = vscode.workspace.getConfiguration().get('ewiv.summary') || '';
 		let bot = new MWBot();
 		bot.loginGetEditToken({
-			apiUrl: 'https://' + apiUrl,
+			apiUrl: apiUrl,
 			username: userName,
 			password: password
 		}).then(() => {
@@ -64,34 +64,34 @@ function activate(context) {
 		if (vscode.window.activeTextEditor) {
 			let content = vscode.window.activeTextEditor.document.getText();
 			let pagename = vscode.workspace.getConfiguration().get('ewiv.pageName') || '';
-			if(pagename==''){
+			if (pagename == '') {
 				pagename = vscode.window.activeTextEditor.document.getText(new vscode.Range(new vscode.Position(0, 0), new vscode.Position(1, 0))).match('<!--ewiv info DO NOT edit (.*)-->');
-				if (pagename==null){
+				if (pagename == null) {
 					GetPagenameAndPushEdit();
 					return;
-				}else{
+				} else {
 					pagename = pagename[1];
 					content = vscode.window.activeTextEditor.document.getText(new vscode.Range(new vscode.Position(1, 0), new vscode.Position(vscode.window.activeTextEditor.document.lineCount + 1, 0)));
 				}
 			}
-			submitEdit(pagename,content);
+			submitEdit(pagename, content);
 		} else {
 			console.error("undefined vscode.window.activeTextEditor");
 		}
 	});
 
-	let CommandEwivInit = vscode.commands.registerCommand('extension.ewivinit',function () {
+	let CommandEwivInit = vscode.commands.registerCommand('extension.ewivinit', function () {
 		init();
 	});
 	context.subscriptions.push(CommandEwivInit);
 	context.subscriptions.push(CommandEwivSubmit);
 }
 
- 
+
 exports.activate = activate;
-			
+
 // this method is called when your extension is deactivated
-function deactivate() {}
+function deactivate() { }
 
 module.exports = {
 	activate,

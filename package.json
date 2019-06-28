@@ -2,7 +2,7 @@
 	"name": "ewiv",
 	"displayName": "ewiv",
 	"description": "edit mediawiki in VSCode",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"publisher": "xwbx",
 	"engines": {
 		"vscode": "^1.35.0"
@@ -22,12 +22,12 @@
 			"properties": {
 				"ewiv.indexUrl":{
 					"type": "string",
-					"default": "fgo.wiki/index.php",
+					"default": "https://fgo.wiki/index.php",
 					"description": "index.php"
 				},
 				"ewiv.apiUrl": {
 					"type": "string",
-					"default": "fgo.wiki/api.php",
+					"default": "https://fgo.wiki/api.php",
 					"description": "api.php"
 				},
 				"ewiv.userName": {

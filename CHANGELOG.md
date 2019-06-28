@@ -42,3 +42,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - 修复会把ewiv的注释提交到服务器的问题
 - 重构
+
+## [0.0.10]
+- http支持
